@@ -73,11 +73,11 @@ void UserButton_Callback(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define USER_BUTTON_Pin LL_GPIO_PIN_13
+#define USER_BUTTON_GPIO_Port GPIOC
+#define USER_BUTTON_EXTI_IRQn EXTI15_10_IRQn
 #define LED2_Pin LL_GPIO_PIN_5
 #define LED2_GPIO_Port GPIOA
-#define USER_BUTTON_Pin LL_GPIO_PIN_4
-#define USER_BUTTON_GPIO_Port GPIOC
-#define USER_BUTTON_EXTI_IRQn EXTI4_IRQn
 #ifndef NVIC_PRIORITYGROUP_0
 #define NVIC_PRIORITYGROUP_0         ((uint32_t)0x00000007) /*!< 0 bit  for pre-emption priority,
                                                                  4 bits for subpriority */
@@ -90,6 +90,7 @@ void UserButton_Callback(void);
 #define NVIC_PRIORITYGROUP_4         ((uint32_t)0x00000003) /*!< 4 bits for pre-emption priority,
                                                                  0 bit  for subpriority */
 #endif
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

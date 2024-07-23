@@ -5,7 +5,7 @@
  *  Abstract    : Linker script for NUCLEO-G491RE Board embedding STM32G491RETx Device from stm32g4 series
  *                      512Kbytes ROM
  *                      16Kbytes CCMSRAM
- *                      128Kbytes RAM
+ *                      112Kbytes RAM
  *
  *            Set heap size, stack size and stack location according
  *            to application requirements.
@@ -37,7 +37,7 @@ _Min_Stack_Size = 0x400;	/* required amount of stack */
 MEMORY
 {
   CCMSRAM    (xrw)    : ORIGIN = 0x10000000,   LENGTH = 16K
-  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 128K
+  RAM    (xrw)    : ORIGIN = 0x20000000,   LENGTH = 112K
   ROM    (rx)    : ORIGIN = 0x08000000,   LENGTH = 512K
 }
 
@@ -78,13 +78,15 @@ SECTIONS
     . = ALIGN(4);
   } >ROM
 
-  .ARM.extab   : { 
+  .ARM.extab (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  {
     . = ALIGN(4);
     *(.ARM.extab* .gnu.linkonce.armextab.*)
     . = ALIGN(4);
   } >ROM
   
-  .ARM : {
+  .ARM (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  {
     . = ALIGN(4);
     __exidx_start = .;
     *(.ARM.exidx*)
@@ -92,7 +94,7 @@ SECTIONS
     . = ALIGN(4);
   } >ROM
 
-  .preinit_array     :
+  .preinit_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     . = ALIGN(4);
     PROVIDE_HIDDEN (__preinit_array_start = .);
@@ -101,7 +103,7 @@ SECTIONS
     . = ALIGN(4);
   } >ROM
   
-  .init_array :
+  .init_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     . = ALIGN(4);
     PROVIDE_HIDDEN (__init_array_start = .);
@@ -111,7 +113,7 @@ SECTIONS
     . = ALIGN(4);
   } >ROM
   
-  .fini_array :
+  .fini_array (READONLY) : /* The READONLY keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
   {
     . = ALIGN(4);
     PROVIDE_HIDDEN (__fini_array_start = .);
